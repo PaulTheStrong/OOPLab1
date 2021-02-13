@@ -1,6 +1,9 @@
 package by.bsuir.oop.labs.first.shapes;
 
-public class Circle extends AbstractShape {
+import javafx.geometry.Point2D;
+import javafx.scene.canvas.GraphicsContext;
+
+public class Circle extends AbstractShape{
 
     private Point2D center;
     private double radius;
@@ -27,15 +30,7 @@ public class Circle extends AbstractShape {
     }
 
     @Override
-    public double calculateArea() {
-        return Math.PI * Math.pow(radius, 2);
-    }
-
-    @Override
-    public String toString() {
-        return "Circle{" +
-                "center=" + center +
-                ", radius=" + radius +
-                '}';
+    public void draw(GraphicsContext graphicsContext) {
+        graphicsContext.strokeOval(center.getX(), center.getY(), radius, radius);
     }
 }
