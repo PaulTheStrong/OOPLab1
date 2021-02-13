@@ -3,24 +3,24 @@ package by.bsuir.oop.labs.first.shapes;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 
-public class Rectangle extends AbstractShape {
+public class Oval extends AbstractShape {
 
-    private Point2D leftUpperCorner;
+    private Point2D center;
     private double width;
     private double height;
 
-    public Rectangle(Point2D leftUpperCorner, double width, double height) {
-        this.leftUpperCorner = leftUpperCorner;
+    public Oval(Point2D center, double width, double height) {
+        this.center = center;
         this.width = width;
         this.height = height;
     }
 
-    public Point2D getLeftUpperCorner() {
-        return leftUpperCorner;
+    public Point2D getCenter() {
+        return center;
     }
 
-    public void setLeftUpperCorner(Point2D leftUpperCorner) {
-        this.leftUpperCorner = leftUpperCorner;
+    public void setCenter(Point2D center) {
+        this.center = center;
     }
 
     public double getWidth() {
@@ -41,6 +41,6 @@ public class Rectangle extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-        graphicsContext.strokeRect(leftUpperCorner.getX(), leftUpperCorner.getY(), width, height);
+        graphicsContext.strokeOval(center.getX(), center.getY(), width, height);
     }
 }
