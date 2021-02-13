@@ -1,5 +1,6 @@
-package by.bsuir.oop.labs.first.shapes;
+package by.bsuir.oop.labs.first;
 
+import by.bsuir.oop.labs.first.shapes.*;
 import javafx.application.Application;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
