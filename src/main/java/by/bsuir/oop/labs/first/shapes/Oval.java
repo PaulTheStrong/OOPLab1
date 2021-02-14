@@ -2,25 +2,26 @@ package by.bsuir.oop.labs.first.shapes;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 
 public class Oval extends AbstractShape {
 
-    private Point2D center;
+    private Point2D leftUpperCorner;
     private double width;
     private double height;
 
-    public Oval(Point2D center, double width, double height) {
-        this.center = center;
+    public Oval(Point2D leftUpperCorner, double width, double height) {
+        this.leftUpperCorner = leftUpperCorner;
         this.width = width;
         this.height = height;
     }
 
-    public Point2D getCenter() {
-        return center;
+    public Point2D getLeftUpperCorner() {
+        return leftUpperCorner;
     }
 
-    public void setCenter(Point2D center) {
-        this.center = center;
+    public void setLeftUpperCorner(Point2D leftUpperCorner) {
+        this.leftUpperCorner = leftUpperCorner;
     }
 
     public double getWidth() {
@@ -41,6 +42,19 @@ public class Oval extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-        graphicsContext.strokeOval(center.getX(), center.getY(), width, height);
+        graphicsContext.strokeOval(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
+                                    height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
+                                    Math.abs(width), Math.abs(height));
+    }
+
+    @Override
+    public void primaryMouseClicked(MouseEvent event) {
+        this.leftUpperCorner = new Point2D(event.getX(), event.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent event) {
+        width = event.getX() - leftUpperCorner.getX();
+        height = event.getY() - leftUpperCorner.getY();
     }
 }
