@@ -2,6 +2,7 @@ package by.bsuir.oop.labs.first.shapes;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 
 public class Rectangle extends AbstractShape {
 
@@ -41,6 +42,19 @@ public class Rectangle extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
-        graphicsContext.strokeRect(leftUpperCorner.getX(), leftUpperCorner.getY(), width, height);
+        graphicsContext.strokeRect(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
+                                    height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
+                                    Math.abs(width), Math.abs(height));
+    }
+
+    @Override
+    public void primaryMouseClicked(MouseEvent event) {
+        leftUpperCorner = new Point2D(event.getX(), event.getY());
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent event) {
+        width = event.getX() - leftUpperCorner.getX();
+        height = event.getY() - leftUpperCorner.getY();
     }
 }
