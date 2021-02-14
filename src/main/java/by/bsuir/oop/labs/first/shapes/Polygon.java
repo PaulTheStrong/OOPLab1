@@ -28,7 +28,7 @@ public class Polygon extends AbstractShape {
         double[] yPoints = new double[points.size()];
 
         for (int i = 0; i < points.size(); i++) {
-            Point2D pt = points.get(0);
+            Point2D pt = points.get(i);
             xPoints[i] = pt.getX();
             yPoints[i] = pt.getY();
         }
