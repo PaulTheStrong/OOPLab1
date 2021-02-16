@@ -21,6 +21,7 @@ public class DrawArea extends Parent {
     public class DrawHistory {
         private List<AbstractShape> shapeHistory = new ArrayList<>();
         private int historyCount = 0;
+        private int maxCount = 0;
 
         public void undo() {
             if (historyCount == 0) {
@@ -41,7 +42,7 @@ public class DrawArea extends Parent {
         }
 
         public void redo() {
-            if (historyCount >= shapeHistory.size()) {
+            if (historyCount >= maxCount) {
                 return;
             }
             historyCount++;
@@ -55,6 +56,7 @@ public class DrawArea extends Parent {
                 shapeHistory.set(historyCount, shape);
             }
             historyCount++;
+            maxCount = historyCount;
         }
     }
 
