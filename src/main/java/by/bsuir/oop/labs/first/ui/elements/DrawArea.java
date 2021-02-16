@@ -16,11 +16,44 @@ import java.util.List;
 
 public class DrawArea extends Parent {
 
+    public class DrawHistory {
+        private List<AbstractShape> shapeHistory = new ArrayList<>();
+        private int historyCount = 0;
+
+        public void undo() {
+            if (historyCount == 0) {
+                return;
+            }
+            historyCount--;
+            mainDrawArea.getGraphicsContext2D().clearRect(0, 0, mainDrawArea.getWidth(), mainDrawArea.getHeight());
+            GraphicsContext gc = mainDrawArea.getGraphicsContext2D();
+            for(int i = 0; i < historyCount; i++) {
+                shapeHistory.get(i).draw(gc);
+            }
+        }
+
+        public void redo() {
+            if (historyCount >= shapeHistory.size()) {
+                return;
+            }
+            historyCount++;
+            shapeHistory.get(historyCount - 1).draw(mainDrawArea.getGraphicsContext2D());
+        }
+
+        public void addShape(AbstractShape shape) {
+            if (historyCount == shapeHistory.size()) {
+                shapeHistory.add(shape);
+            } else {
+                shapeHistory.set(historyCount, shape);
+            }
+            historyCount++;
+        }
+    }
+
     private Canvas mainDrawArea;
     private Canvas tempDrawArea;
 
-    private List<AbstractShape> shapeHistory = new ArrayList<>();
-    private int historyCount = 0;
+    private DrawHistory drawHistory = new DrawHistory();
 
     private boolean isDrawing = false;
 
@@ -45,6 +78,10 @@ public class DrawArea extends Parent {
         this.factory = factory;
     }
 
+    public DrawHistory getDrawHistory() {
+        return drawHistory;
+    }
+
     private void initHandlers() {
         EventHandler<MouseEvent> onClick = new EventHandler<MouseEvent>() {
             @Override
@@ -59,12 +96,7 @@ public class DrawArea extends Parent {
                         shape.draw(mainDrawArea.getGraphicsContext2D());
                         tempDrawArea.getGraphicsContext2D().clearRect(0, 0, tempDrawArea.getWidth(), tempDrawArea.getHeight());
                         isDrawing = !isDrawing;
-                        if (historyCount == shapeHistory.size()) {
-                            shapeHistory.add(shape);
-                        } else {
-                            shapeHistory.set(historyCount, shape);
-                        }
-                        historyCount++;
+                        drawHistory.addShape(shape);
                     }
                 }
             }
@@ -83,26 +115,6 @@ public class DrawArea extends Parent {
 
         addEventFilter(MouseEvent.MOUSE_CLICKED, onClick);
         addEventFilter(MouseEvent.MOUSE_MOVED, onDrag);
-    }
-
-    public void undo() {
-        if (historyCount == 0) {
-            return;
-        }
-        historyCount--;
-        mainDrawArea.getGraphicsContext2D().clearRect(0, 0, mainDrawArea.getWidth(), mainDrawArea.getHeight());
-        GraphicsContext gc = mainDrawArea.getGraphicsContext2D();
-        for(int i = 0; i < historyCount; i++) {
-            shapeHistory.get(i).draw(gc);
-        }
-    }
-
-    public void redo() {
-        if (historyCount >= shapeHistory.size()) {
-            return;
-        }
-        historyCount++;
-        shapeHistory.get(historyCount - 1).draw(mainDrawArea.getGraphicsContext2D());
     }
 
 }

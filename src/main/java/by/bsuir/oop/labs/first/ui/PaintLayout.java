@@ -28,9 +28,9 @@ public class PaintLayout extends AnchorPane {
             @Override
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.Z && event.isControlDown()) {
-                    drawArea.undo();
+                    drawArea.getDrawHistory().undo();
                 } else if (event.getCode() == KeyCode.U && event.isControlDown()) {
-                    drawArea.redo();
+                    drawArea.getDrawHistory().redo();
                 }
             }
         };
