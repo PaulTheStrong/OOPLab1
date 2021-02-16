@@ -2,7 +2,6 @@ package by.bsuir.oop.labs.first.shapes;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 
 public class Oval extends AbstractShape {
 
@@ -48,13 +47,8 @@ public class Oval extends AbstractShape {
     }
 
     @Override
-    public void primaryMouseClicked(MouseEvent event) {
-        this.leftUpperCorner = new Point2D(event.getX(), event.getY());
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent event) {
-        width = event.getX() - leftUpperCorner.getX();
-        height = event.getY() - leftUpperCorner.getY();
+    public void update(Point2D newPoint) {
+        width = newPoint.getX() - leftUpperCorner.getX();
+        height = newPoint.getY() - leftUpperCorner.getY();
     }
 }

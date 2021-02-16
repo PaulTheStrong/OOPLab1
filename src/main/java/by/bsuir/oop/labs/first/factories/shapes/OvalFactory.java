@@ -5,7 +5,7 @@ import javafx.geometry.Point2D;
 
 public class OvalFactory extends AbstractShapeFactory {
     @Override
-    public Oval createShape() {
-        return new Oval(new Point2D(0, 0), 0, 0);
+    public Oval createShape(Point2D startPoint) {
+        return new Oval(startPoint, 0, 0);
     }
 }

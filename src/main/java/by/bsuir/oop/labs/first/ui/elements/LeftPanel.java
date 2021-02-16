@@ -1,15 +1,10 @@
 package by.bsuir.oop.labs.first.ui.elements;
 
 import by.bsuir.oop.labs.first.factories.shapes.*;
-import by.bsuir.oop.labs.first.shapes.AbstractShape;
-import by.bsuir.oop.labs.first.shapes.Circle;
-import by.bsuir.oop.labs.first.shapes.Rectangle;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.input.MouseEvent;

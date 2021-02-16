@@ -6,7 +6,7 @@ import javafx.geometry.Point2D;
 public class RectangleFactory extends AbstractShapeFactory {
 
     @Override
-    public Rectangle createShape() {
-        return new Rectangle(new Point2D(0, 0), 0, 0);
+    public Rectangle createShape(Point2D startPoint) {
+        return new Rectangle(startPoint, 0, 0);
     }
 }

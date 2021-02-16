@@ -9,13 +9,19 @@ import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DrawArea extends Parent {
 
     private Canvas mainDrawArea;
     private Canvas tempDrawArea;
+
+    private List<AbstractShape> shapeHistory = new ArrayList<>();
+    private int historyCount = 0;
 
     private boolean isDrawing;
 
@@ -35,16 +41,21 @@ public class DrawArea extends Parent {
             @Override
             public void handle(MouseEvent event) {
                 if (!isDrawing) {
-                    shape = factory.createShape();
-                    shape.primaryMouseClicked(event);
+                    shape = factory.createShape(new Point2D(event.getX(), event.getY()));
                     isDrawing = !isDrawing;
                 } else {
                     if (event.getButton() == MouseButton.SECONDARY) {
-                        shape.secondaryMouseClicked(event);
+                        shape.addPoint(new Point2D(event.getX(), event.getY()));
                     } else {
                         shape.draw(mainDrawArea.getGraphicsContext2D());
                         tempDrawArea.getGraphicsContext2D().clearRect(0, 0, tempDrawArea.getWidth(), tempDrawArea.getHeight());
                         isDrawing = !isDrawing;
+                        if (historyCount == shapeHistory.size()) {
+                            shapeHistory.add(shape);
+                        } else {
+                            shapeHistory.set(historyCount, shape);
+                        }
+                        historyCount++;
                     }
                 }
             }
@@ -55,15 +66,34 @@ public class DrawArea extends Parent {
             public void handle(MouseEvent event) {
                 if (isDrawing) {
                     tempDrawArea.getGraphicsContext2D().clearRect(0, 0, tempDrawArea.getWidth(), tempDrawArea.getHeight());
-                    shape.mouseMoved(event);
+                    shape.update(new Point2D(event.getX(), event.getY()));
                     shape.draw(tempDrawArea.getGraphicsContext2D());
-                    shape.mouseMoved(event);
                 }
             }
         };
 
         addEventFilter(MouseEvent.MOUSE_CLICKED, onClick);
         addEventFilter(MouseEvent.MOUSE_MOVED, onDrag);
+    }
+
+    public void undo() {
+        if (historyCount == 0) {
+            return;
+        }
+        historyCount--;
+        mainDrawArea.getGraphicsContext2D().clearRect(0, 0, mainDrawArea.getWidth(), mainDrawArea.getHeight());
+        GraphicsContext gc = mainDrawArea.getGraphicsContext2D();
+        for(int i = 0; i < historyCount; i++) {
+            shapeHistory.get(i).draw(gc);
+        }
+    }
+
+    public void redo() {
+        if (historyCount >= shapeHistory.size()) {
+            return;
+        }
+        historyCount++;
+        shapeHistory.get(historyCount - 1).draw(mainDrawArea.getGraphicsContext2D());
     }
 
     public DrawArea(double width, double height) {

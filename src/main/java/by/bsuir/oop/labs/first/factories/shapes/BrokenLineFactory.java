@@ -5,7 +5,7 @@ import javafx.geometry.Point2D;
 
 public class BrokenLineFactory extends AbstractShapeFactory {
     @Override
-    public BrokenLine createShape() {
-        return new BrokenLine(new Point2D(0, 0), new Point2D(0, 0));
+    public BrokenLine createShape(Point2D startPoint) {
+        return new BrokenLine(startPoint, startPoint);
     }
 }

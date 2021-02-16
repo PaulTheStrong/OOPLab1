@@ -5,7 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,19 +36,13 @@ public class Polygon extends AbstractShape {
     }
 
     @Override
-    public void primaryMouseClicked(MouseEvent event) {
-        points.set(0, new Point2D(event.getX(), event.getY()));
+    public void addPoint(Point2D newPoint) {
+        points.add(newPoint);
     }
 
     @Override
-    public void secondaryMouseClicked(MouseEvent event) {
-        System.out.println(points);
-        points.add(new Point2D(event.getX(), event.getY()));
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent event) {
-        points.set(points.size() - 1, new Point2D(event.getX(), event.getY()));
+    public void update(Point2D newPoint) {
+        points.set(points.size() - 1, new Point2D(newPoint.getX(), newPoint.getY()));
     }
 }
 

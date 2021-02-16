@@ -1,6 +1,6 @@
 package by.bsuir.oop.labs.first.shapes;
 
-import javafx.scene.canvas.Canvas;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -12,8 +12,7 @@ public abstract class AbstractShape {
 
     public abstract void draw(GraphicsContext graphicsContext);
 
-    public abstract void primaryMouseClicked(MouseEvent event);
-    public void secondaryMouseClicked(MouseEvent event) {}
-    public abstract void mouseMoved(MouseEvent event);
+    public void addPoint(Point2D newPoint) {}
+    public abstract void update(Point2D newPoint);
 
 }

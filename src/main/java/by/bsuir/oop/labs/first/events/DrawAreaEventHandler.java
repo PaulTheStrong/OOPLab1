@@ -1,6 +1,5 @@
 package by.bsuir.oop.labs.first.events;
 
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 

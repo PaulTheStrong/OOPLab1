@@ -7,7 +7,7 @@ import javafx.geometry.Point2D;
 public class CircleFactory extends AbstractShapeFactory {
 
     @Override
-    public Circle createShape() {
-        return new Circle(new Point2D(0, 0), 0);
+    public Circle createShape(Point2D startPoint) {
+        return new Circle(startPoint, 0);
     }
 }

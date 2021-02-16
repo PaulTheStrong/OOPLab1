@@ -1,22 +1,15 @@
 package by.bsuir.oop.labs.first.ui;
 
-import by.bsuir.oop.labs.first.shapes.Rectangle;
+import by.bsuir.oop.labs.first.shapes.AbstractShape;
 import by.bsuir.oop.labs.first.ui.elements.DrawArea;
 import by.bsuir.oop.labs.first.ui.elements.LeftPanel;
-import javafx.collections.ObservableList;
-import javafx.geometry.Point2D;
-import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
+import javafx.event.EventHandler;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
-import static by.bsuir.oop.labs.first.OOPPaint.drawShapes;
 
 public class PaintLayout extends AnchorPane {
 
@@ -30,6 +23,19 @@ public class PaintLayout extends AnchorPane {
         setLeftAnchor(drawArea, 100.);
         getChildren().add(new LeftPanel(drawArea));
         getChildren().add(drawArea);
+
+        EventHandler<javafx.scene.input.KeyEvent> undo = new EventHandler<javafx.scene.input.KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.Z && event.isControlDown()) {
+                    drawArea.undo();
+                } else if (event.getCode() == KeyCode.U && event.isControlDown()) {
+                    drawArea.redo();
+                }
+            }
+        };
+
+        addEventFilter(KeyEvent.KEY_PRESSED, undo);
     }
 
 }
