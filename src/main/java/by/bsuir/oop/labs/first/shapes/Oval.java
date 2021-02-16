@@ -5,11 +5,12 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class Oval extends AbstractShape {
 
-    private Point2D leftUpperCorner;
-    private double width;
-    private double height;
+    protected Point2D leftUpperCorner;
+    protected double width;
+    protected double height;
 
-    public Oval(Point2D leftUpperCorner, double width, double height) {
+    public Oval(GraphicsContext graphicsContext, Point2D leftUpperCorner, double width, double height) {
+        super(graphicsContext);
         this.leftUpperCorner = leftUpperCorner;
         this.width = width;
         this.height = height;
@@ -41,9 +42,14 @@ public class Oval extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
+        updateGraphics(graphicsContext);
+        graphicsContext.fillOval(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
+                height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
+                Math.abs(width), Math.abs(height));
         graphicsContext.strokeOval(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
                                     height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
                                     Math.abs(width), Math.abs(height));
+
     }
 
     @Override

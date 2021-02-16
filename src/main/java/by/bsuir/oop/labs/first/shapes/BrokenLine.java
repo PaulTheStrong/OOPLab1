@@ -3,6 +3,8 @@ package by.bsuir.oop.labs.first.shapes;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,7 +14,8 @@ public class BrokenLine extends AbstractShape {
 
     private List<Point2D> points;
 
-    public BrokenLine(Point2D... points) {
+    public BrokenLine(GraphicsContext graphicsContext, Point2D... points) {
+        super(graphicsContext);
         if (points.length < 2) {
             throw new IllegalArgumentException();
         }
@@ -30,6 +33,8 @@ public class BrokenLine extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
+        updateGraphics(graphicsContext);
+
         for (int i = 0; i < points.size() - 1; i++) {
             Point2D first = points.get(i);
             Point2D second = points.get(i + 1);

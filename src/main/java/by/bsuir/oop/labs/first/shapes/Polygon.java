@@ -12,7 +12,8 @@ public class Polygon extends AbstractShape {
 
     private List<Point2D> points;
 
-    public Polygon(Point2D... points) {
+    public Polygon(GraphicsContext graphicsContext, Point2D... points) {
+        super(graphicsContext);
         this.points = new ArrayList<>();
         Collections.addAll(this.points, points);
     }
@@ -23,6 +24,7 @@ public class Polygon extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
+        updateGraphics(graphicsContext);
         double[] xPoints = new double[points.size()];
         double[] yPoints = new double[points.size()];
 
@@ -33,6 +35,7 @@ public class Polygon extends AbstractShape {
         }
 
         graphicsContext.fillPolygon(xPoints, yPoints, points.size());
+        graphicsContext.strokePolygon(xPoints, yPoints, points.size());
     }
 
     @Override

@@ -1,6 +1,9 @@
 package by.bsuir.oop.labs.first.ui.elements;
 
 import by.bsuir.oop.labs.first.factories.shapes.*;
+import by.bsuir.oop.labs.first.ui.elements.pickers.FillColorPicker;
+import by.bsuir.oop.labs.first.ui.elements.pickers.StrokeColorPicker;
+import by.bsuir.oop.labs.first.ui.elements.pickers.StrokeWidthPicker;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,11 +41,18 @@ public class LeftPanel extends FlowPane {
             });
             children.add(btn);
         }
-        setStyle("-fx-background-color: purple");
 
-        ColorPicker cp = new ColorPicker();
-        cp.setPrefWidth(90);
-        children.add(cp);
+        StrokeWidthPicker strokeWidthPicker = new StrokeWidthPicker(drawArea.getCanvases());
+        strokeWidthPicker.setPrefSize(90, 10);
+        children.add(strokeWidthPicker);
+
+        StrokeColorPicker strokeColorPicker = new StrokeColorPicker(drawArea.getCanvases());
+        strokeColorPicker.setMaxWidth(90);
+        children.add(strokeColorPicker);
+
+        FillColorPicker fillColorPicker = new FillColorPicker(drawArea.getCanvases());
+        fillColorPicker.setMaxWidth(90);
+        children.add(fillColorPicker);
     }
 
 }

@@ -10,8 +10,10 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DrawArea extends Parent {
@@ -27,9 +29,15 @@ public class DrawArea extends Parent {
             historyCount--;
             mainDrawArea.getGraphicsContext2D().clearRect(0, 0, mainDrawArea.getWidth(), mainDrawArea.getHeight());
             GraphicsContext gc = mainDrawArea.getGraphicsContext2D();
+            Paint strokeColor = gc.getStroke();
+            double strokeWidth = gc.getLineWidth();
+            Paint fillColor = gc.getFill();
             for(int i = 0; i < historyCount; i++) {
                 shapeHistory.get(i).draw(gc);
             }
+            gc.setStroke(strokeColor);
+            gc.setLineWidth(strokeWidth);
+            gc.setFill(fillColor);
         }
 
         public void redo() {
@@ -82,12 +90,16 @@ public class DrawArea extends Parent {
         return drawHistory;
     }
 
+    public List<Canvas> getCanvases() {
+        return Arrays.asList(mainDrawArea, tempDrawArea);
+    }
+
     private void initHandlers() {
         EventHandler<MouseEvent> onClick = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 if (!isDrawing) {
-                    shape = factory.createShape(new Point2D(event.getX(), event.getY()));
+                    shape = factory.createShape(mainDrawArea.getGraphicsContext2D(), new Point2D(event.getX(), event.getY()));
                     isDrawing = !isDrawing;
                 } else {
                     if (event.getButton() == MouseButton.SECONDARY) {

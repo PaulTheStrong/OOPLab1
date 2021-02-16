@@ -9,7 +9,8 @@ public class Rectangle extends AbstractShape {
     private double width;
     private double height;
 
-    public Rectangle(Point2D leftUpperCorner, double width, double height) {
+    public Rectangle(GraphicsContext graphicsContext, Point2D leftUpperCorner, double width, double height) {
+        super(graphicsContext);
         this.leftUpperCorner = leftUpperCorner;
         this.width = width;
         this.height = height;
@@ -41,6 +42,10 @@ public class Rectangle extends AbstractShape {
 
     @Override
     public void draw(GraphicsContext graphicsContext) {
+        updateGraphics(graphicsContext);
+        graphicsContext.fillRect(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
+                height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
+                Math.abs(width), Math.abs(height));
         graphicsContext.strokeRect(width > 0 ? leftUpperCorner.getX() : leftUpperCorner.getX() + width,
                                     height > 0 ? leftUpperCorner.getY() : leftUpperCorner.getY() + height,
                                     Math.abs(width), Math.abs(height));
