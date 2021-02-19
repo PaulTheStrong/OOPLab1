@@ -1,6 +1,6 @@
 Paint
 ===
-Версия - Java SE 8
+Версия - Java SE 15.0.2
 
 Код написан в IDE IntellijIDEA
 
