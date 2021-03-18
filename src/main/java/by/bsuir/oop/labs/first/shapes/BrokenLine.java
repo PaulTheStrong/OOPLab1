@@ -14,6 +14,8 @@ public class BrokenLine extends AbstractShape {
 
     private List<Point2D> points;
 
+    public BrokenLine() {}
+
     public BrokenLine(GraphicsContext graphicsContext, Point2D... points) {
         super(graphicsContext);
         if (points.length < 2) {

@@ -1,15 +1,17 @@
 package by.bsuir.oop.labs.first.shapes;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public abstract class AbstractShape {
 
-    protected Paint strokeColor;
-    protected Paint fillColor;
+    protected Color strokeColor;
+    protected Color fillColor;
     protected double strokeWidth;
 
     public abstract void draw(GraphicsContext graphicsContext);
@@ -17,9 +19,11 @@ public abstract class AbstractShape {
     public void addPoint(Point2D newPoint) {}
     public abstract void update(Point2D newPoint);
 
-    protected AbstractShape(GraphicsContext graphicsContext) {
-        strokeColor = graphicsContext.getStroke();
-        fillColor = graphicsContext.getFill();
+    public AbstractShape() {}
+
+    public AbstractShape(GraphicsContext graphicsContext) {
+        strokeColor = (Color) graphicsContext.getStroke();
+        fillColor = (Color) graphicsContext.getFill();
         strokeWidth = graphicsContext.getLineWidth();
     }
 
@@ -27,5 +31,29 @@ public abstract class AbstractShape {
         graphicsContext.setStroke(strokeColor);
         graphicsContext.setLineWidth(strokeWidth);
         graphicsContext.setFill(fillColor);
+    }
+
+    public Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public void setStrokeColor(Color strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public double getStrokeWidth() {
+        return strokeWidth;
+    }
+
+    public void setStrokeWidth(double strokeWidth) {
+        this.strokeWidth = strokeWidth;
     }
 }

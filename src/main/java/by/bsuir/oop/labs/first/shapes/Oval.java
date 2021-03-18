@@ -9,6 +9,8 @@ public class Oval extends AbstractShape {
     protected double width;
     protected double height;
 
+    public Oval() {}
+
     public Oval(GraphicsContext graphicsContext, Point2D leftUpperCorner, double width, double height) {
         super(graphicsContext);
         this.leftUpperCorner = leftUpperCorner;

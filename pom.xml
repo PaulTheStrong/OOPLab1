@@ -23,6 +23,13 @@
                 <version>0.0.5</version>
                 <configuration>
                     <mainClass>by.bsuir.oop.labs.first.OOPPaint</mainClass>
+                    <options>
+                        <option>--add-opens</option>
+                        <option>javafx.graphics/javafx.scene.paint=ALL-UNNAMED</option>
+                        <option>--add-opens</option>
+                        <option>javafx.graphics/javafx.geometry=ALL-UNNAMED</option>
+
+                    </options>
                 </configuration>
             </plugin>
         </plugins>
@@ -42,6 +49,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
             <version>15</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.1</version>
         </dependency>
     </dependencies>
 

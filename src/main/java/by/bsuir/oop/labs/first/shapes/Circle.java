@@ -9,6 +9,7 @@ public class Circle extends Oval{
         super(graphicsContext, leftUpperCorner, radius, radius);
     }
 
+    public Circle() {}
 
     @Override
     public void update(Point2D newPoint) {

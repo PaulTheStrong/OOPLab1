@@ -1,4 +1,4 @@
-package by.bsuir.oop.labs.first.factories.shapes;
+package by.bsuir.oop.labs.first.factories;
 
 import by.bsuir.oop.labs.first.shapes.Rectangle;
 import javafx.geometry.Point2D;

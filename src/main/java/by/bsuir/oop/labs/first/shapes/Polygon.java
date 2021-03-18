@@ -12,6 +12,8 @@ public class Polygon extends AbstractShape {
 
     private List<Point2D> points;
 
+    public Polygon() {}
+
     public Polygon(GraphicsContext graphicsContext, Point2D... points) {
         super(graphicsContext);
         this.points = new ArrayList<>();

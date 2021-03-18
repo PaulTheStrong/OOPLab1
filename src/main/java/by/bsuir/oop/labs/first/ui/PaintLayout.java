@@ -21,6 +21,7 @@ public class PaintLayout extends AnchorPane {
             public void handle(KeyEvent event) {
                 if (event.getCode() == KeyCode.Z && event.isControlDown()) {
                     drawArea.getDrawHistory().undo();
+                    drawArea.redraw();
                 } else if (event.getCode() == KeyCode.U && event.isControlDown()) {
                     drawArea.getDrawHistory().redo();
                 }

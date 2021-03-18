@@ -9,6 +9,8 @@ public class Rectangle extends AbstractShape {
     private double width;
     private double height;
 
+    public Rectangle() {}
+
     public Rectangle(GraphicsContext graphicsContext, Point2D leftUpperCorner, double width, double height) {
         super(graphicsContext);
         this.leftUpperCorner = leftUpperCorner;
