@@ -28,12 +28,12 @@
                         <option>javafx.graphics/javafx.scene.paint=ALL-UNNAMED</option>
                         <option>--add-opens</option>
                         <option>javafx.graphics/javafx.geometry=ALL-UNNAMED</option>
-
                     </options>
                 </configuration>
             </plugin>
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>

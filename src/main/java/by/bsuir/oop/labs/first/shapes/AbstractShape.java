@@ -3,9 +3,11 @@ package by.bsuir.oop.labs.first.shapes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+
+import java.util.List;
+import java.util.ServiceLoader;
+import java.util.stream.Collectors;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public abstract class AbstractShape {
@@ -13,6 +15,14 @@ public abstract class AbstractShape {
     protected Color strokeColor;
     protected Color fillColor;
     protected double strokeWidth;
+
+    public static List<AbstractShape> getServices(ModuleLayer layer) {
+        return ServiceLoader
+                .load(layer, AbstractShape.class)
+                .stream()
+                .map(ServiceLoader.Provider::get)
+                .collect(Collectors.toList());
+    }
 
     public abstract void draw(GraphicsContext graphicsContext);
 

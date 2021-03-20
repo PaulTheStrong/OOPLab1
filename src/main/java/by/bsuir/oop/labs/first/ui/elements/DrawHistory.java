@@ -3,8 +3,6 @@ package by.bsuir.oop.labs.first.ui.elements;
 import by.bsuir.oop.labs.first.shapes.AbstractShape;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Paint;
 
 import java.util.ArrayList;
 import java.util.List;

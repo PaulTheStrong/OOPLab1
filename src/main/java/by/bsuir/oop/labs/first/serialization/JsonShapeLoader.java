@@ -14,7 +14,6 @@ import javafx.scene.paint.Color;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Optional;
 
 public class JsonShapeLoader {
 

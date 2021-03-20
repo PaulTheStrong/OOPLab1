@@ -10,10 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.FlowPane;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,23 +53,29 @@ public class LeftPanel extends FlowPane {
         children.add(fillColorPicker);
 
         Button saveButton = new Button("Save");
+        saveButton.setPrefWidth(90);
         children.add(saveButton);
         saveButton.setOnAction(event -> {
-            Dialog<String> dialog = new TextInputDialog();
-            dialog.setHeaderText("Enter filename.");
-            String filename = dialog.showAndWait().orElse("shapes.json");
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Выберите файл сохранения");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+            fileChooser.setInitialDirectory(new File("."));
+            File file = fileChooser.showSaveDialog(getScene().getWindow());
             JsonShapeSaver saver = new JsonShapeSaver();
-            saver.saveShapes(drawArea.getDrawHistory(), filename);
+            saver.saveShapes(drawArea.getDrawHistory(), file.getAbsolutePath());
         });
 
         Button loadButton = new Button("Load");
         children.add(loadButton);
+        loadButton.setPrefWidth(90);
         loadButton.setOnAction(event -> {
-            Dialog<String> dialog = new TextInputDialog();
-            dialog.setHeaderText("Enter filename.");
-            String filename = dialog.showAndWait().orElse("shapes.json");
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Выберите файл загрузки");
+            fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("JSON", "*.json"));
+            fileChooser.setInitialDirectory(new File("."));
+            File file = fileChooser.showOpenDialog(getScene().getWindow());
             JsonShapeLoader loader = new JsonShapeLoader();
-            DrawHistory drawHistory = loader.loadShapes(filename, drawArea);
+            DrawHistory drawHistory = loader.loadShapes(file.getAbsolutePath(), drawArea);
             drawArea.setDrawHistory(drawHistory);
             drawArea.redraw();
         });

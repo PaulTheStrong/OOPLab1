@@ -7,6 +7,6 @@ import javafx.scene.canvas.GraphicsContext;
 public class PolygonFactory extends AbstractShapeFactory {
     @Override
     public Polygon createShape(GraphicsContext graphicsContext, Point2D startPoint) {
-        return new Polygon(graphicsContext, startPoint, new Point2D(0, 0));
+        return new Polygon(graphicsContext, startPoint, startPoint);
     }
 }

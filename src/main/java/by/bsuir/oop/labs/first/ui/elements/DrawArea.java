@@ -1,7 +1,7 @@
 package by.bsuir.oop.labs.first.ui.elements;
 
 import by.bsuir.oop.labs.first.factories.AbstractShapeFactory;
-import by.bsuir.oop.labs.first.factories.CircleFactory;
+import by.bsuir.oop.labs.first.factories.RectangleFactory;
 import by.bsuir.oop.labs.first.shapes.AbstractShape;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -12,7 +12,6 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public class DrawArea extends Parent {
 
     private boolean isDrawing = false;
 
-    private AbstractShapeFactory factory;
+    private AbstractShapeFactory factory = new RectangleFactory();
     private AbstractShape shape;
 
     public DrawArea(double width, double height) {
