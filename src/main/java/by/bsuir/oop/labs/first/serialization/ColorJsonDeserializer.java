@@ -6,8 +6,6 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.node.DoubleNode;
-import com.fasterxml.jackson.databind.node.TextNode;
-import com.sun.jdi.DoubleValue;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
