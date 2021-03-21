@@ -11,7 +11,9 @@ Paint
 2. Перейти в консоли в склонированный репозитроий
 3. Запустить 
 ```
-mvn javafx:run
+mvn clean install
+cd core-ui
+target\OOPPaint\bin\java -m core.ui/by.bsuir.oop.labs.first.OOPPaint
 ```
 
 Для добавления точек в полигон или в ломанную надо нажать пкм. Для завершения рисования нажать лкм.

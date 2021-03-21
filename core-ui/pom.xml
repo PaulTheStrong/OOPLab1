@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>by.bsuir.oop.labs.by.bsuir.oop.labs.first</groupId>
+        <artifactId>OOPPaint</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>core-ui</artifactId>
+    <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>by.bsuir.oop.labs.by.bsuir.oop.labs.first</groupId>
+            <artifactId>core-shapes</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <maven.compiler.source>15</maven.compiler.source>
+        <maven.compiler.target>15</maven.compiler.target>
+    </properties>
+
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>by.bsuir.oop.labs.first.OOPPaint</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.3</version>
+                <configuration>
+                    <release>11</release>
+                    <jlinkImageName>OOPPaint</jlinkImageName>
+                    <launcher>launcher</launcher>
+                    <mainClass>by.bsuir.oop.labs.first.OOPPaint</mainClass>
+                    <options>
+                        <option>--add-opens</option>
+                        <option>javafx.graphics/javafx.scene.paint=ALL-UNNAMED</option>
+                        <option>--add-opens</option>
+                        <option>javafx.graphics/javafx.geometry=ALL-UNNAMED</option>
+                    </options>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
