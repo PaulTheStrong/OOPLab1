@@ -13,7 +13,8 @@ Paint
 ```
 mvn clean install
 cd core-ui
-target\OOPPaint\bin\java -m core.ui/by.bsuir.oop.labs.first.OOPPaint
+mvn javafx:jlink
+target\OOPPaint\bin\java --add-opens javafx.graphics/javafx.scene.paint=com.fasterxml.jackson.databind --add-opens javafx.graphics/javafx.geometry=com.fasterxml.jackson.databind -m core.ui/by.bsuir.oop.labs.first.OOPPaint
 ```
 
 Для добавления точек в полигон или в ломанную надо нажать пкм. Для завершения рисования нажать лкм.

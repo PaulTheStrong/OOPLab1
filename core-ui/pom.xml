@@ -50,9 +50,7 @@
                     <mainClass>by.bsuir.oop.labs.first.OOPPaint</mainClass>
                     <options>
                         <option>--add-opens</option>
-                        <option>javafx.graphics/javafx.scene.paint=ALL-UNNAMED</option>
-                        <option>--add-opens</option>
-                        <option>javafx.graphics/javafx.geometry=ALL-UNNAMED</option>
+                        <option>javafx.graphics=com.fasterxml.jackson.databind</option>
                     </options>
                 </configuration>
             </plugin>

@@ -30,14 +30,20 @@ public class LeftPanel extends FlowPane {
         setHgap(10);
         setPadding(new Insets(5));
         List<Button> buttons = new ArrayList<>();
+        System.out.println("oiasdhiausdh");
+        System.out.println("oiasdhiausdh");
+        System.out.println("oiasdhiausdh");
+        System.out.println("oiasdhiausdh");
+        System.out.println("oiasdhiausdh");
 //        List<AbstractShapeFactory> factories = Arrays.asList(new RectangleFactory(), new OvalFactory(), new CircleFactory(), new PolygonFactory(), new BrokenLineFactory());
         List<AbstractShapeFactory> factories = new ModuleLoader().getAllFactories();
         System.out.println(Arrays.toString(factories.toArray()));
-        List<String> names = Arrays.asList("Rectangle", "Circle", "Oval", "Polygon", "Broken");
+//        List<String> names = Arrays.asList("Rectangle", "Circle", "Oval", "Polygon", "Broken");
 
         for (int i = 0; i <  factories.size(); i++) {
             AbstractShapeFactory factory = factories.get(i);
-            Button btn = new Button(names.get(i));
+            String className = factory.getClass().toString();
+            Button btn = new Button(className.substring(className.lastIndexOf(".")+1, className.lastIndexOf("Factory")));
             btn.setPrefSize(90, 15);
             btn.setOnMouseClicked(event -> drawArea.setFactory(factory));
             children.add(btn);

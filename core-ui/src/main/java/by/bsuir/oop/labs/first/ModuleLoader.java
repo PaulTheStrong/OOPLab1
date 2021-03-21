@@ -1,6 +1,7 @@
 package by.bsuir.oop.labs.first;
 
 import by.bsuir.oop.labs.core.factories.AbstractShapeFactory;
+import by.bsuir.oop.labs.core.shapes.AbstractShape;
 
 import java.lang.module.Configuration;
 import java.lang.module.ModuleDescriptor;
@@ -15,6 +16,7 @@ public class ModuleLoader {
 
     public List<AbstractShapeFactory> getAllFactories() {
         Path pluginsDir = Paths.get("plugins");
+        System.out.println(pluginsDir.toAbsolutePath());
         ModuleFinder pluginsFinder = ModuleFinder.of(pluginsDir);
 
         List<String> plugins = pluginsFinder
@@ -34,6 +36,30 @@ public class ModuleLoader {
                 .defineModulesWithOneLoader(pluginsConfiguration, ClassLoader.getSystemClassLoader());
 
         return AbstractShapeFactory.getServices(layer);
+    }
+
+    public List<AbstractShape> getAllShapes() {
+        Path pluginsDir = Paths.get("plugins");
+        System.out.println(pluginsDir.toAbsolutePath());
+        ModuleFinder pluginsFinder = ModuleFinder.of(pluginsDir);
+
+        List<String> plugins = pluginsFinder
+                .findAll()
+                .stream()
+                .map(ModuleReference::descriptor)
+                .map(ModuleDescriptor::name)
+                .collect(Collectors.toList());
+
+        Configuration pluginsConfiguration = ModuleLayer
+                .boot()
+                .configuration()
+                .resolve(pluginsFinder, ModuleFinder.of(), plugins);
+
+        ModuleLayer layer = ModuleLayer
+                .boot()
+                .defineModulesWithOneLoader(pluginsConfiguration, ClassLoader.getSystemClassLoader());
+
+        return AbstractShape.getServices(layer);
     }
 
 }
