@@ -1,4 +1,4 @@
-package trapezoid;
+package regpolygon;
 
 import by.bsuir.oop.labs.core.shapes.AbstractShape;
 import javafx.geometry.Point2D;
